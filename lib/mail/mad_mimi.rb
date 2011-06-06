@@ -23,6 +23,18 @@ module Mail #:nodoc:
   # Use <tt>:list_name => "beta users"</tt> to send to a list or
   # <tt>:to_all => true</tt> to send to all subscribers.
   #
+  # = Mad Mimi macros
+  #
+  # If you are sending to an individual email address, the body must
+  # include <tt>[[tracking_beacon]]</tt> or <tt>[[peek_image]]</tt>.
+  #
+  # If you are sending to a list or everyone, the body must include
+  # <tt>[[opt_out]]</tt> or <tt>unsubscribe</tt>.
+  #
+  # An exception will be raised if you don't include a macro. When debugging,
+  # you may want to make sure that you set <tt>raise_delivery_errors = true</tt>
+  # on your <tt>Mail</tt> object.
+  #
   # = Rails 3 support
   #
   # If ActionMailer is loaded, Mail::MadMimi registers itself as a
