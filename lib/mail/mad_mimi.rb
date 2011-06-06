@@ -37,7 +37,7 @@ module Mail
     end
 
     if defined? ActionMailer::Base
-      ActionMailer::Base.add_delivery_method :madmimi, Mail::MadMimi
+      ActionMailer::Base.add_delivery_method :mad_mimi, Mail::MadMimi
 
       module SetMailerAction
         def wrap_delivery_behavior!(*args)

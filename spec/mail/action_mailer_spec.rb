@@ -9,7 +9,7 @@ end
 
 describe Mail::MadMimi, "when ActionMailer is loaded" do
   it "should register itself as a delivery_method" do
-    ActionMailer::Base.delivery_methods[:madmimi].should == Mail::MadMimi
+    ActionMailer::Base.delivery_methods[:mad_mimi].should == Mail::MadMimi
   end
 
   it "should add a mailer_action method to messages for the promotion name" do
