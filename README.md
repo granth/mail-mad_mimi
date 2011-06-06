@@ -3,6 +3,26 @@
 `Mail::MadMimi` is a delivery method for `Mail`.
 It uses the `MadMimi` library to send mail via [Mad Mimi][1].
 
+## Installation
+
+Add to your `Gemfile`:
+
+    gem "mail-mad_mimi", :require => "mail/mad_mimi"
+
+## Usage
+
+    require "mail"
+    require "mail/mad_mimi"
+
+    mail = Mail.new do
+      to              "user@example.com"
+      from            "sender@example.com"
+      subject         "test"
+      delivery_method Mail::MadMimi, :email => "sender@example.com", :api_key => "1234"
+    end
+
+    mail.deliver
+
 ## Headers and options
 
 The `:to`, `:from`, `:bcc`, and `:subject`
