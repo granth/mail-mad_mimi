@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "mail-mad_mimi"
   s.version     = Mail::MadMimi::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.authors     = ["Grant Hollingworth"]
+  s.email       = ["grant@antiflux.org"]
+  s.homepage    = "https://github.com/granth/mail-mad_mimi"
+  s.summary     = "A Mad Mimi delivery method for the Ruby Mail library, with Rails 3 support."
+  s.description = s.summary
 
   s.rubyforge_project = "mail-mad_mimi"
 
