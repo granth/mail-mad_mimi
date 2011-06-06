@@ -44,9 +44,14 @@ describe Mail::MadMimi do
       options[:subject].should    == "test mail"
     end
 
-    it "should merge in the settings" do
+    it "should merge in the class settings" do
       subject.settings[:hidden] = true  # hide in Mad Mimi interface
       options[:hidden].should be_true
+    end
+
+    it "should merge in :mad_mimi settings in mail object" do
+      mail[:mad_mimi] = {:promotion_name => "custom"}
+      options[:promotion_name].should == "custom"
     end
 
     context "with a text part" do

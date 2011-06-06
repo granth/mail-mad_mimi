@@ -27,6 +27,8 @@ module Mail
         if mail.respond_to? :mailer_action
           options[:promotion_name] = mail.mailer_action 
         end
+
+        options.merge!(mail[:mad_mimi].value) if mail[:mad_mimi]
       end
     end
 
