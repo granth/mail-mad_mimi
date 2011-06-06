@@ -1,10 +1,47 @@
 require "madmimi"
 
-module Mail
+module Mail #:nodoc:
+  # Mail::MadMimi is a delivery method for <tt>Mail</tt>.
+  # It uses the <tt>MadMimi</tt> library to send mail via Mad Mimi.
+  #
+  # = Headers and options
+  #
+  # The <tt>:to</tt>, <tt>:from</tt>, <tt>:bcc</tt>, and <tt>:subject</tt>
+  # headers are taken from the <tt>Mail</tt> object passed to
+  # <tt>deliver!</tt>
+  #
+  # In addition, any hash values given as a <tt>:mad_mimi</tt> header are
+  # passed on to Mad Mimi. That means if you use the <tt>Mail</tt> object with
+  # a different delivery method, you'll get an ugly <tt>mad_mimi</tt> header.
+  #
+  # You can see other available options on the Mad Mimi developer site:
+  # http://madmimi.com/developer/mailer/transactional
+  #
+  # HTML (<tt>:raw_html</tt>) and plain text (<tt>:raw_plain_text</tt>) bodies
+  # are extracted from the <tt>Mail</tt> object.
+  #
+  # Use <tt>:list_name => "beta users"</tt> to send to a list or
+  # <tt>:to_all => true</tt> to send to all subscribers.
+  #
+  # = Rails 3 support
+  #
+  # If ActionMailer is loaded, Mail::MadMimi registers itself as a
+  # delivery method.
+  #
+  # You can then configure it in an environment file:
+  #
+  #   config.action_mailer.delivery_method = :mad_mimi
+  #   config.action_mailer.mad_mimi_settings = {
+  #     :email   => "user@example.com",
+  #     :api_key => "a1b9892611956aa13a5ab9ccf01f4966",
+  #   }
   class MadMimi
     class Error < StandardError; end
     attr_accessor :settings, :mimi
 
+    # Any settings given here will be passed to Mad Mimi.
+    #
+    # <tt>:email</tt> and <tt>:api_key</tt> are required.
     def initialize(settings = {})
       unless settings[:email] && settings[:api_key]
         raise Error, "Missing :email and :api_key settings"
