@@ -70,12 +70,44 @@ describe Mail::MadMimi do
       end
     end
 
+    context "with a non-multipart text body" do
+      before(:each) do
+        mail.body         = "text body"
+        mail.content_type = "text/plain"
+      end
+
+      it "should set :raw_plain_text" do
+        options[:raw_plain_text].should == "text body"
+      end
+    end
+
+    context "with a text body no content type given" do
+      before(:each) do
+        mail.body = "text body"
+      end
+
+      it "should set :raw_plain_text" do
+        options[:raw_plain_text].should == "text body"
+      end
+    end
+
     context "with an HTML part" do
       before(:each) do
         mail.html_part do
           content_type "text/html"
           body         "html body"
         end
+      end
+
+      it "should set :raw_html" do
+        options[:raw_html].should == "html body"
+      end
+    end
+
+    context "with a non-multipart HTML body" do
+      before(:each) do
+        mail.body         = "html body"
+        mail.content_type = "text/html"
       end
 
       it "should set :raw_html" do

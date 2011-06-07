@@ -22,19 +22,36 @@ module Mail #:nodoc:
 
     def options_from_mail(mail)
       settings.merge(
-        :recipients => mail[:to].to_s,
-        :from       => mail[:from].to_s,
-        :bcc        => mail[:bcc].to_s,
-        :subject    => mail.subject
+        :recipients     => mail[:to].to_s,
+        :from           => mail[:from].to_s,
+        :bcc            => mail[:bcc].to_s,
+        :subject        => mail.subject,
+        :raw_html       => html(mail),
+        :raw_plain_text => text(mail)
       ).tap do |options|
-        options[:raw_html]       = mail.html_part.body.to_s if mail.html_part
-        options[:raw_plain_text] = mail.text_part.body.to_s if mail.text_part
-
         if mail.respond_to? :mailer_action
-          options[:promotion_name] = mail.mailer_action 
+          options[:promotion_name] = mail.mailer_action
         end
 
         options.merge!(mail[:mad_mimi].value) if mail[:mad_mimi]
+
+        options.reject! {|k,v| v.nil? }
+      end
+    end
+
+    def html(mail)
+      body(mail, "text/html")
+    end
+
+    def text(mail)
+      body(mail, "text/plain") || mail.body.to_s
+    end
+
+    def body(mail, mime_type)
+      if part = mail.find_first_mime_type(mime_type)
+        part.body.to_s
+      elsif mail.mime_type == mime_type
+        mail.body.to_s
       end
     end
 
