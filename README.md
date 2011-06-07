@@ -47,11 +47,10 @@ If you are sending to an individual email address, the body must
 include `[[tracking_beacon]]` or `[[peek_image]]`.
 
 If you are sending to a list or everyone, the body must include
-`[[opt_out]]` or `unsubscribe`.
+`[[opt_out]]` or `[[unsubscribe]]`.
 
 An exception will be raised if you don't include a macro. When debugging,
-you may want to make sure that you set `raise_delivery_errors = true`
-on your `Mail` object.
+you may want to set `raise_delivery_errors = true` on your `Mail` object.
 
 ## Rails 3 support
 
